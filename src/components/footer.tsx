@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ChevronUp } from "lucide-react";
+import { basePath } from "@/lib/base-path";
 
 const footerLinks = [
   { label: "Sobre", href: "/sobre" },
@@ -17,13 +18,13 @@ const backToTopButtonClass =
 export function Footer() {
   return (
     <footer className="relative border-t border-[#DDDDDD] bg-[#E8E8E8]">
-      <Link
-        href="#hero"
+      <a
+        href={`${basePath || ""}/#hero`}
         aria-label="Voltar ao topo"
         className={backToTopButtonClass}
       >
         <ChevronUp className="size-8 stroke-[1.8]" />
-      </Link>
+      </a>
 
       <div className="mx-auto flex min-h-[86px] max-w-[960px] flex-col items-center justify-between gap-5 px-4 py-8 text-center md:flex-row md:text-left">
         <p className={footerTextClass}>© 2026 Diego Suque</p>

@@ -1,9 +1,20 @@
+"use client";
+
 import Link from "next/link";
+import { Menu, X } from "lucide-react";
+import { useState } from "react";
 import { SafeImage } from "@/components/safe-image";
 import { basePath } from "@/lib/base-path";
 
 const navLinks = [
   { label: "Projetos", href: "/portfolio" },
+  { label: "Sobre", href: "/sobre" },
+  { label: "Front-end", href: "/front-end" },
+  { label: "Contato", href: "/contato" },
+];
+
+const mobileNavLinks = [
+  { label: "Portfólio", href: "/portfolio" },
   { label: "Sobre", href: "/sobre" },
   { label: "Front-end", href: "/front-end" },
   { label: "Contato", href: "/contato" },
@@ -74,14 +85,30 @@ const iconButtonClass =
 const logoButtonClass =
   "relative grid h-[66px] w-[66px] shrink-0 place-items-center overflow-hidden rounded-[22px] border border-[#1C1C1C] bg-[#080808] text-white shadow-[6px_6px_12px_#c5c5c5,-6px_-6px_12px_#ffffff] outline-none transition-all duration-200 hover:scale-[1.02] hover:bg-[#111111] hover:shadow-[0_4px_3px_1px_#FCFCFC,0_6px_8px_#D6D7D9,0_-4px_4px_#CECFD1,0_-6px_4px_#FEFEFE,inset_0_0_3px_3px_rgba(255,255,255,0.08)] active:scale-100 active:shadow-[inset_4px_4px_10px_#000000,inset_-4px_-4px_10px_rgba(255,255,255,0.12)] focus:shadow-[0_4px_3px_1px_#FCFCFC,0_6px_8px_#D6D7D9,0_-4px_4px_#CECFD1,0_-6px_4px_#FEFEFE,inset_0_0_3px_3px_rgba(255,255,255,0.08)]";
 
+const mobileMenuButtonClass =
+  "grid size-[46px] place-items-center rounded-full border border-[#8F9092] bg-[linear-gradient(to_top,#D8D9DB_0%,#fff_80%,#FDFDFD_100%)] text-[#606060] shadow-none outline-none transition-all duration-200 [text-shadow:0_1px_#fff] hover:text-[#303030] focus-visible:ring-2 focus-visible:ring-[#606060] focus-visible:ring-offset-2 focus-visible:ring-offset-[#E8E8E8]";
+
+const mobileMenuLinkClass =
+  "flex min-h-[46px] items-center rounded-[18px] border border-[#DDDDDD] bg-[#F7F7F7] px-5 text-[15px] font-semibold text-[#606060] outline-none transition hover:text-[#303030] focus-visible:ring-2 focus-visible:ring-[#606060] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F2F2F2]";
+
 export function Navbar() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  function closeMobileMenu() {
+    setIsMobileMenuOpen(false);
+  }
+
   return (
     <header className="fixed inset-x-0 top-0 z-50 bg-[#e8e8e8]">
       <nav
         aria-label="Navegação principal"
         className="mx-auto flex h-[104px] max-w-[1320px] items-center justify-between px-6 md:px-10"
       >
-        <Link href="/#hero" className={logoButtonClass} aria-label="Diego Suque">
+        <a
+          href={`${basePath || ""}/#hero`}
+          className={logoButtonClass}
+          aria-label="Diego Suque"
+        >
           <span className="relative block h-[58px] w-[58px]">
             <SafeImage
               src={`${basePath}/images/logo-suque.png`}
@@ -92,7 +119,7 @@ export function Navbar() {
               className="object-contain"
             />
           </span>
-        </Link>
+        </a>
 
         <div className="hidden items-center gap-4 md:flex">
           {navLinks.map((link) => (
@@ -102,7 +129,7 @@ export function Navbar() {
           ))}
         </div>
 
-        <div className="flex items-center gap-4">
+        <div className="hidden items-center gap-4 md:flex">
           {socialLinks.map(({ label, href, icon: Icon }) => (
             <Link
               key={label}
@@ -116,7 +143,57 @@ export function Navbar() {
             </Link>
           ))}
         </div>
+
+        <button
+          type="button"
+          aria-label={isMobileMenuOpen ? "Fechar menu" : "Abrir menu"}
+          aria-expanded={isMobileMenuOpen}
+          aria-controls="mobile-navigation"
+          className={`${mobileMenuButtonClass} md:hidden`}
+          onClick={() => setIsMobileMenuOpen((isOpen) => !isOpen)}
+        >
+          {isMobileMenuOpen ? (
+            <X aria-hidden="true" className="size-6 stroke-[1.9]" />
+          ) : (
+            <Menu aria-hidden="true" className="size-6 stroke-[1.9]" />
+          )}
+        </button>
       </nav>
+
+      {isMobileMenuOpen ? (
+        <div
+          id="mobile-navigation"
+          className="mx-4 mb-4 rounded-[24px] border border-[#E2E2E2] bg-[#F2F2F2] p-4 shadow-[8px_8px_18px_#cfcfcf,-8px_-8px_18px_#ffffff] md:hidden"
+        >
+          <div className="grid gap-3">
+            {mobileNavLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={mobileMenuLinkClass}
+                onClick={closeMobileMenu}
+              >
+                {link.label}
+              </Link>
+            ))}
+
+            <div className="my-1 h-px bg-[#D0D0D0]" />
+
+            {socialLinks.map(({ label, href }) => (
+              <a
+                key={href}
+                href={href}
+                target="_blank"
+                rel="noreferrer"
+                className={mobileMenuLinkClass}
+                onClick={closeMobileMenu}
+              >
+                {label}
+              </a>
+            ))}
+          </div>
+        </div>
+      ) : null}
     </header>
   );
 }
