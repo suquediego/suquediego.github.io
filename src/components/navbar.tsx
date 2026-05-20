@@ -3,7 +3,7 @@ import { SafeImage } from "@/components/safe-image";
 import { basePath } from "@/lib/base-path";
 
 const navLinks = [
-  { label: "Projetos", href: "/projetos" },
+  { label: "Projetos", href: "/portfolio" },
   { label: "Sobre", href: "/sobre" },
   { label: "Front-end", href: "/front-end" },
   { label: "Contato", href: "/contato" },

@@ -1,0 +1,68 @@
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+import { PageShell } from "@/components/page-shell";
+import { WorkCard } from "@/components/work-card";
+import { works } from "@/data/works";
+
+const otherProjects = ["Caronte", "Vale Pix", "Prize Tech", "Payco", "Jobs.bet"];
+
+export default function PortfolioPage() {
+  return (
+    <PageShell>
+      <section className="mx-auto max-w-[1180px]">
+        <p className="text-[11px] font-black uppercase tracking-[0.34em] text-[#777777]">
+          Portfolio
+        </p>
+
+        <h1 className="mt-5 text-[56px] font-black leading-[0.92] tracking-[-0.055em] text-[#303030] sm:text-[74px] lg:text-[96px]">
+          Projetos
+        </h1>
+
+        <p className="mt-7 max-w-[780px] text-[18px] leading-[1.7] text-[#727272] sm:text-[20px]">
+          Uma seleção de produtos digitais, interfaces e experiências criadas
+          para contextos financeiros, operacionais e digitais.
+        </p>
+      </section>
+
+      <section className="mx-auto mt-16 max-w-[1180px]">
+        <div className="grid gap-7 md:grid-cols-3">
+          {works.map((work) => (
+            <WorkCard key={work.title} work={work} />
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-auto mt-20 max-w-[1180px]">
+        <div className="mb-8 flex items-center gap-8">
+          <h2 className="shrink-0 text-[32px] font-black leading-none tracking-[-0.045em] text-[#303030]">
+            Outros projetos
+          </h2>
+          <div className="h-px w-full bg-[#D0D0D0]" />
+        </div>
+
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
+          {otherProjects.map((project) => (
+            <article
+              key={project}
+              className="rounded-[22px] border border-[#E2E2E2] bg-[#F2F2F2] p-6 shadow-[7px_7px_16px_#d0d0d0,-7px_-7px_16px_#ffffff]"
+            >
+              <h3 className="text-[22px] font-black leading-none tracking-[-0.04em] text-[#303030]">
+                {project}
+              </h3>
+              <p className="mt-4 text-[14px] leading-[1.6] text-[#727272]">
+                Base reservada para conteúdo, imagens e recortes do projeto.
+              </p>
+              <Link
+                href="/portfolio"
+                className="mt-6 inline-flex items-center gap-2 text-[13px] font-semibold text-[#606060]"
+              >
+                Em estruturação
+                <ArrowRight className="size-4" />
+              </Link>
+            </article>
+          ))}
+        </div>
+      </section>
+    </PageShell>
+  );
+}
