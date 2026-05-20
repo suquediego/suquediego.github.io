@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { SafeImage } from "@/components/safe-image";
+import { basePath } from "@/lib/base-path";
 
 const navLinks = [
   { label: "Projetos", href: "/projetos" },
@@ -83,7 +84,7 @@ export function Navbar() {
         <Link href="/#hero" className={logoButtonClass} aria-label="Diego Suque">
           <span className="relative block h-[58px] w-[58px]">
             <SafeImage
-              src="/images/logo-suque.png"
+              src={`${basePath}/images/logo-suque.png`}
               alt="Logo Diego Suque"
               fill
               priority
