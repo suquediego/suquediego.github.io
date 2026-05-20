@@ -15,7 +15,7 @@ export function FeaturedWork() {
           <div className="h-px w-full max-w-[280px] bg-[#D0D0D0]" />
         </div>
 
-        <div className="grid gap-7 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-7 lg:grid-cols-2 xl:grid-cols-3">
           {works.map((work) => (
             <WorkCard key={work.title} work={work} />
           ))}

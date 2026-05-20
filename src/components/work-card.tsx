@@ -80,8 +80,8 @@ export function WorkCard({ work }: WorkCardProps) {
             {work.description}
           </p>
 
-          <div className="mt-5 flex items-center justify-between">
-            <span className="inline-flex h-[48px] min-w-[150px] items-center justify-center rounded-[30px] border border-[#8F9092] bg-[linear-gradient(to_top,#D8D9DB_0%,#fff_80%,#FDFDFD_100%)] px-6 text-[14px] font-semibold text-[#606060] shadow-none outline-none transition-all duration-300 [text-shadow:0_1px_#fff] hover:text-[#303030] hover:shadow-[0_4px_3px_1px_#FCFCFC,0_6px_8px_#D6D7D9,0_-4px_4px_#CECFD1,0_-6px_4px_#FEFEFE,inset_0_0_3px_3px_#CECFD1]">
+          <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
+            <span className="inline-flex h-[48px] min-w-[142px] items-center justify-center rounded-[30px] border border-[#8F9092] bg-[linear-gradient(to_top,#D8D9DB_0%,#fff_80%,#FDFDFD_100%)] px-5 text-[14px] font-semibold text-[#606060] shadow-none outline-none transition-all duration-300 [text-shadow:0_1px_#fff] hover:text-[#303030] hover:shadow-[0_4px_3px_1px_#FCFCFC,0_6px_8px_#D6D7D9,0_-4px_4px_#CECFD1,0_-6px_4px_#FEFEFE,inset_0_0_3px_3px_#CECFD1] sm:min-w-[150px] sm:px-6">
               Ver projeto
             </span>
 
