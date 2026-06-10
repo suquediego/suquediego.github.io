@@ -858,21 +858,18 @@ export function FrontendScrollStory() {
 
               {activeContent.stack?.length ? (
                 <div className="mx-auto mt-7 flex max-w-[90%] flex-wrap justify-center gap-x-3 gap-y-3 text-[10px] font-black uppercase tracking-[0.16em] text-[#555555] sm:text-[11px] md:mx-0 md:mt-6 md:max-w-[560px] md:justify-start md:gap-y-2 md:tracking-[0.18em] md:text-[#8a8a8a]">
-                  {activeContent.stack.map(
-                    (item, index) => (
-                      <span
-                        key={item}
-                        className="inline-flex items-center gap-3"
-                      >
-                        {item}
+                  {activeContent.stack.map((item, index, stackItems) => (
+                    <span
+                      key={item}
+                      className="inline-flex items-center gap-3"
+                    >
+                      {item}
 
-                        {index <
-                        activeContent.stack.length - 1 ? (
-                          <span className="h-1 w-1 rounded-full bg-[#b8b8b8] md:bg-[#cfcfcf]" />
-                        ) : null}
-                      </span>
-                    ),
-                  )}
+                      {index < stackItems.length - 1 ? (
+                        <span className="h-1 w-1 rounded-full bg-[#b8b8b8] md:bg-[#cfcfcf]" />
+                      ) : null}
+                    </span>
+                  ))}
                 </div>
               ) : null}
 
