@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 
 import { PageShell } from "@/components/page-shell";
 import { SafeImage } from "@/components/safe-image";
+import { useTranslation } from "@/hooks/use-translation";
 import { basePath } from "@/lib/base-path";
 
 type MobileShowcaseProps = {
@@ -31,75 +32,6 @@ type FlowShowcaseProps = {
     aspectClassName: string;
   }[];
 };
-
-const painCards = [
-  {
-    title: "Pagamento nao reconhecido",
-    description:
-      "Quando o cliente paga, mas a operacao nao identifica a transacao com clareza, o atrito aparece na saida.",
-  },
-  {
-    title: "Duvidas na cobranca",
-    description:
-      "Divergencia entre tempo, valor cobrado e comprovante aumenta inseguranca e reclamacoes.",
-  },
-  {
-    title: "Dependencia de atendimento",
-    description:
-      "Problemas simples passam a depender de guiche, SAC ou validacao manual.",
-  },
-  {
-    title: "Fila e frustracao",
-    description:
-      "Em horarios de pico, pequenos atrasos se multiplicam e afetam a percepcao da marca.",
-  },
-];
-
-const impactCards = [
-  {
-    metric: "Menos atrito na saida",
-    description:
-      "Pagamento pelo celular reduz dependencia de guiche, maquininha e atendimento presencial.",
-  },
-  {
-    metric: "Mais clareza para o usuario",
-    description:
-      "Valor, tempo de permanencia e metodo de pagamento ficam visiveis antes da confirmacao.",
-  },
-  {
-    metric: "Menos chamados simples",
-    description:
-      "A confirmacao de status reduz a necessidade de comprovar manualmente o pagamento.",
-  },
-  {
-    metric: "Mais fluidez operacional",
-    description:
-      "Menos filas e menos interacoes presenciais ajudam a melhorar o fluxo em horarios de pico.",
-  },
-];
-
-const learningCards = [
-  {
-    title: "Status precisa ser imediato",
-    description:
-      "Em operacoes presenciais, a interface precisa responder rapido e com baixa margem de interpretacao.",
-  },
-  {
-    title: "Mobile deve reduzir atrito",
-    description:
-      "Cada tela precisa apoiar uma acao clara, sem transformar uma validacao simples em processo complexo.",
-  },
-  {
-    title: "Confianca vem do contexto",
-    description:
-      "Valor, ticket, horario e situacao precisam aparecer juntos para sustentar a decisao do operador.",
-  },
-  {
-    title: "Operacao dita o ritmo",
-    description:
-      "O desenho precisa considerar fila, pressa, ambiente fisico e alternancia entre cliente e operador.",
-  },
-];
 
 const parkingPixImages = {
   camera: `${basePath}/images/parkingpix/parkingpix-camera-escaneia.png`,
@@ -236,6 +168,13 @@ function FlowShowcase({ images }: FlowShowcaseProps) {
 }
 
 export default function ParkingPixPage() {
+  const t = useTranslation();
+  const common = t.cases.common;
+  const caseText = t.cases.parkingpix;
+  const painCards = caseText.painCards;
+  const impactCards = caseText.impactCards;
+  const learningCards = caseText.learningCards;
+
   return (
     <PageShell variant="case">
       <article className="bg-white text-[#303030]">
@@ -250,14 +189,11 @@ export default function ParkingPixPage() {
               className="max-w-[560px] pt-2 lg:pt-20"
             >
               <h1 className="text-left text-[38px] font-black leading-[0.98] tracking-[-0.045em] text-[#303030] md:text-[48px] lg:text-[54px]">
-                ParkingPix: pagamento mobile via PIX para estacionamentos.
+                {caseText.hero.title}
               </h1>
 
               <p className="mt-7 max-w-[520px] text-left text-base leading-8 text-[#727272] md:text-xl md:leading-9">
-                Experiencia de pagamento por QR Code criada para reduzir filas,
-                dar clareza sobre o valor cobrado e permitir que o usuario
-                finalize a jornada do estacionamento pelo celular, sem depender
-                de maquininha, guiche ou atendimento presencial.
+                {caseText.hero.description}
               </p>
             </motion.div>
 
@@ -280,22 +216,13 @@ export default function ParkingPixPage() {
               className="max-w-[540px]"
             >
               <h2 className="text-left text-[36px] font-bold leading-[1] tracking-[-0.035em] text-[#303030] md:text-[44px] lg:text-[48px]">
-                Visao geral
+                {common.overview}
               </h2>
 
               <div className="mt-7 space-y-5 text-left text-base leading-8 text-[#686868] md:text-xl md:leading-9">
-                <p>
-                  O ParkingPix propoe uma jornada mobile simples para
-                  estacionamentos: o usuario escaneia o QR Code do ticket,
-                  visualiza o tempo de permanencia, entende o valor final e
-                  escolhe pagar via PIX.
-                </p>
-
-                <p>
-                  A experiencia foi pensada para reduzir atritos em uma etapa
-                  sensivel da jornada: o momento em que o cliente precisa pagar
-                  e sair rapidamente, especialmente em horarios de pico.
-                </p>
+                {caseText.overview.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
               </div>
             </motion.div>
           </div>
@@ -311,23 +238,13 @@ export default function ParkingPixPage() {
               className="max-w-[540px]"
             >
               <h2 className="text-left text-[36px] font-bold leading-[1] tracking-[-0.035em] text-[#303030] md:text-[44px] lg:text-[48px]">
-                Contexto do produto
+                {common.productContext}
               </h2>
 
               <div className="mt-7 space-y-5 text-left text-base leading-8 text-[#686868] md:text-xl md:leading-9">
-                <p>
-                  Em estacionamentos de shopping, o pagamento e um ponto de alto
-                  impacto na percepcao da experiencia. Filas, duvidas sobre
-                  cobranca, falhas em meios tradicionais e dependencia de
-                  atendimento transformam uma etapa simples em frustracao.
-                </p>
-
-                <p>
-                  O problema nao esta apenas no pagamento em si, mas na falta de
-                  clareza e rastreabilidade: o usuario precisa entender quanto
-                  deve pagar, confirmar que a transacao foi reconhecida e sair
-                  sem precisar provar manualmente que pagou.
-                </p>
+                {caseText.productContext.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
               </div>
             </motion.div>
 
@@ -370,21 +287,13 @@ export default function ParkingPixPage() {
               className="max-w-[540px]"
             >
               <h2 className="text-left text-[36px] font-bold leading-[1] tracking-[-0.035em] text-[#303030] md:text-[44px] lg:text-[48px]">
-                Fluxo mobile
+                {caseText.mobileFlow.title}
               </h2>
 
               <div className="mt-7 space-y-5 text-left text-base leading-8 text-[#686868] md:text-xl md:leading-9">
-                <p>
-                  A jornada foi estruturada para ser direta: escanear o QR Code,
-                  conferir o resumo, escolher PIX, copiar ou escanear o codigo
-                  de pagamento e aguardar a confirmacao.
-                </p>
-
-                <p>
-                  Cada etapa precisava reduzir ansiedade e deixar claro o que
-                  estava acontecendo, evitando abandono, duvidas ou acionamento
-                  desnecessario do atendimento.
-                </p>
+                {caseText.mobileFlow.paragraphs.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
               </div>
             </motion.div>
           </div>
@@ -400,21 +309,13 @@ export default function ParkingPixPage() {
               className="max-w-[540px]"
             >
               <h2 className="text-left text-[36px] font-bold leading-[1] tracking-[-0.035em] text-[#303030] md:text-[44px] lg:text-[48px]">
-                Contexto operacional
+                {common.operationalContext}
               </h2>
 
               <div className="mt-7 space-y-5 text-left text-base leading-8 text-[#686868] md:text-xl md:leading-9">
-                <p>
-                  Em estacionamentos, a validacao acontece no ponto de contato
-                  entre atendimento, fila, comprovante e liberacao. A interface
-                  precisa apoiar uma decisao rapida sem exigir leitura extensa.
-                </p>
-
-                <p>
-                  O ParkingPix organiza informacoes essenciais para que operador
-                  e cliente entendam se o pagamento foi iniciado, confirmado,
-                  pendente ou precisa de nova verificacao.
-                </p>
+                {caseText.operationalContext.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
               </div>
             </motion.div>
 
@@ -449,7 +350,7 @@ export default function ParkingPixPage() {
                 >
                   <div>
                     <span className="text-xs font-semibold uppercase tracking-[0.16em] text-[#9A9A9A]">
-                      Dor operacional
+                      {common.operationalContext}
                     </span>
 
                     <h3 className="mt-4 text-[26px] font-bold leading-[1.05] tracking-[-0.035em] text-[#303030] md:text-[30px]">
@@ -472,21 +373,13 @@ export default function ParkingPixPage() {
               className="max-w-[540px]"
             >
               <h2 className="text-left text-[36px] font-bold leading-[1] tracking-[-0.035em] text-[#303030] md:text-[44px] lg:text-[48px]">
-                Principais dores
+                {common.mainPainPoints}
               </h2>
 
               <div className="mt-7 space-y-5 text-left text-base leading-8 text-[#686868] md:text-xl md:leading-9">
-                <p>
-                  A operacao precisava reduzir dependencia de comprovantes
-                  enviados manualmente e tornar a confirmacao mais objetiva para
-                  quem atende e para quem paga.
-                </p>
-
-                <p>
-                  O fluxo tambem precisava preservar contexto minimo de ticket,
-                  valor e horario para evitar duvidas recorrentes durante a
-                  liberacao.
-                </p>
+                {caseText.painPointsIntro.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
               </div>
             </motion.div>
           </div>
@@ -502,28 +395,17 @@ export default function ParkingPixPage() {
               className="max-w-[540px]"
             >
               <h2 className="text-left text-[36px] font-bold leading-[1] tracking-[-0.035em] text-[#303030] md:text-[44px] lg:text-[48px]">
-                O desafio de design
+                {common.designChallenge}
               </h2>
 
               <div className="mt-7 space-y-5 text-left text-base leading-8 text-[#686868] md:text-xl md:leading-9">
-                <p>
-                  O desafio foi desenhar uma experiencia simples para um momento
-                  de pressa. O usuario nao quer aprender um sistema novo: ele
-                  quer entender o valor, pagar com confianca e sair.
-                </p>
-
-                <p>
-                  Por isso, a interface precisava priorizar clareza, feedback de
-                  status e linguagem objetiva, mostrando o que fazer em cada
-                  etapa e evitando duvidas sobre pagamento, confirmacao e
-                  finalizacao.
-                </p>
+                {caseText.challenge.paragraphs.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
               </div>
 
               <p className="mt-7 border-l border-[#BDBDBD] pl-5 text-left text-sm font-semibold leading-7 text-[#303030] md:text-base md:leading-8">
-                A prioridade foi criar uma leitura de status que funcionasse no
-                ritmo da operacao presencial, com confirmacao clara e baixa
-                carga cognitiva.
+                {caseText.challenge.note}
               </p>
             </motion.div>
 
@@ -553,22 +435,13 @@ export default function ParkingPixPage() {
               className="max-w-[540px]"
             >
               <h2 className="text-left text-[36px] font-bold leading-[1] tracking-[-0.035em] text-[#303030] md:text-[44px] lg:text-[48px]">
-                Meu papel
+                {common.myRole}
               </h2>
 
               <div className="mt-7 space-y-5 text-left text-base leading-8 text-[#686868] md:text-xl md:leading-9">
-                <p>
-                  Atuei na estruturacao da experiencia mobile, organizando o
-                  fluxo de pagamento, a hierarquia das informacoes e os estados
-                  principais da jornada.
-                </p>
-
-                <p>
-                  O trabalho envolveu pensar em uma experiencia clara para
-                  leitura de valor, escolha do metodo de pagamento, confirmacao
-                  via PIX e retorno final para o usuario, mantendo o foco em
-                  reduzir atrito operacional.
-                </p>
+                {caseText.role.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
               </div>
             </motion.div>
           </div>
@@ -584,21 +457,13 @@ export default function ParkingPixPage() {
               className="max-w-[540px]"
             >
               <h2 className="text-left text-[36px] font-bold leading-[1] tracking-[-0.035em] text-[#303030] md:text-[44px] lg:text-[48px]">
-                Validacao de pagamento
+                {caseText.paymentValidation.title}
               </h2>
 
               <div className="mt-7 space-y-5 text-left text-base leading-8 text-[#686868] md:text-xl md:leading-9">
-                <p>
-                  A etapa de pagamento via PIX precisava deixar claro que o
-                  usuario poderia escanear o QR Code ou copiar o codigo, alem de
-                  mostrar o estado de espera enquanto a transacao era confirmada.
-                </p>
-
-                <p>
-                  Mensagens como aguardando confirmacao e nao feche esta janela
-                  ajudam a reduzir ansiedade e evitam que o usuario interrompa o
-                  fluxo antes da finalizacao.
-                </p>
+                {caseText.paymentValidation.paragraphs.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
               </div>
             </motion.div>
 
@@ -628,19 +493,13 @@ export default function ParkingPixPage() {
               className="max-w-[540px]"
             >
               <h2 className="text-left text-[36px] font-bold leading-[1] tracking-[-0.035em] text-[#303030] md:text-[44px] lg:text-[48px]">
-                Confirmacao e status
+                {caseText.confirmationStatus.title}
               </h2>
 
               <div className="mt-7 space-y-5 text-left text-base leading-8 text-[#686868] md:text-xl md:leading-9">
-                <p>
-                  Apos a aprovacao, a interface confirma a transacao e orienta o
-                  usuario sobre a finalizacao da sessao.
-                </p>
-
-                <p>
-                  O objetivo e fechar o fluxo com seguranca, reforcando que o
-                  pagamento foi reconhecido e que o veiculo ja pode ser retirado.
-                </p>
+                {caseText.confirmationStatus.paragraphs.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
               </div>
             </motion.div>
           </div>
@@ -656,66 +515,26 @@ export default function ParkingPixPage() {
               className="max-w-[540px]"
             >
               <h2 className="text-left text-[36px] font-bold leading-[1] tracking-[-0.035em] text-[#303030] md:text-[44px] lg:text-[48px]">
-                Decisoes de design
+                {common.designDecisions}
               </h2>
 
               <div className="mt-7 space-y-5 text-left text-base leading-8 text-[#686868] md:text-xl md:leading-9">
-                <p>
-                  As decisoes foram guiadas por simplicidade, velocidade de
-                  leitura e confianca operacional.
-                </p>
+                {caseText.designDecisions.paragraphs.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
               </div>
 
               <div className="mt-8 space-y-6 text-left">
-                <div>
+                {caseText.designDecisions.cards.map((card) => (
+                <div key={card.title}>
                   <h3 className="text-lg font-bold leading-6 tracking-[-0.02em] text-[#303030] md:text-xl">
-                    Valor visivel antes da acao
+                    {card.title}
                   </h3>
                   <p className="mt-2 text-sm leading-7 text-[#686868] md:text-base md:leading-8">
-                    O usuario precisa entender tempo de permanencia e valor final
-                    antes de escolher como pagar.
+                    {card.description}
                   </p>
                 </div>
-
-                <div>
-                  <h3 className="text-lg font-bold leading-6 tracking-[-0.02em] text-[#303030] md:text-xl">
-                    Feedback constante de status
-                  </h3>
-                  <p className="mt-2 text-sm leading-7 text-[#686868] md:text-base md:leading-8">
-                    A interface mostra quando o pagamento esta em andamento,
-                    quando precisa de acao e quando foi confirmado.
-                  </p>
-                </div>
-
-                <div>
-                  <h3 className="text-lg font-bold leading-6 tracking-[-0.02em] text-[#303030] md:text-xl">
-                    PIX como metodo familiar
-                  </h3>
-                  <p className="mt-2 text-sm leading-7 text-[#686868] md:text-base md:leading-8">
-                    A escolha por PIX reduz aprendizado e conecta o fluxo a um
-                    metodo de pagamento ja conhecido pelo usuario.
-                  </p>
-                </div>
-
-                <div>
-                  <h3 className="text-lg font-bold leading-6 tracking-[-0.02em] text-[#303030] md:text-xl">
-                    Linguagem direta para reduzir ansiedade
-                  </h3>
-                  <p className="mt-2 text-sm leading-7 text-[#686868] md:text-base md:leading-8">
-                    Mensagens curtas orientam o proximo passo e evitam duvidas
-                    durante a espera pela confirmacao.
-                  </p>
-                </div>
-
-                <div>
-                  <h3 className="text-lg font-bold leading-6 tracking-[-0.02em] text-[#303030] md:text-xl">
-                    Confirmacao clara no final
-                  </h3>
-                  <p className="mt-2 text-sm leading-7 text-[#686868] md:text-base md:leading-8">
-                    O fechamento do fluxo precisa reduzir ansiedade e deixar
-                    claro que o usuario ja pode retirar o veiculo.
-                  </p>
-                </div>
+                ))}
               </div>
             </motion.div>
 
@@ -748,7 +567,7 @@ export default function ParkingPixPage() {
                 >
                   <div>
                     <span className="text-xs font-semibold uppercase tracking-[0.16em] text-[#9A9A9A]">
-                      Impacto projetado
+                      {common.impact}
                     </span>
 
                     <h3 className="mt-4 text-[26px] font-bold leading-[1.05] tracking-[-0.035em] text-[#303030] md:text-[30px]">
@@ -771,29 +590,17 @@ export default function ParkingPixPage() {
               className="max-w-[540px]"
             >
               <h2 className="text-left text-[36px] font-bold leading-[1] tracking-[-0.035em] text-[#303030] md:text-[44px] lg:text-[48px]">
-                Impacto
+                {common.impact}
               </h2>
 
               <div className="mt-7 space-y-5 text-left text-base leading-8 text-[#686868] md:text-xl md:leading-9">
-                <p>
-                  O impacto esperado do ParkingPix esta na reducao de atritos
-                  recorrentes ligados ao pagamento: duvidas sobre cobranca,
-                  pagamento nao reconhecido, filas e dependencia de atendimento
-                  manual.
-                </p>
-
-                <p>
-                  Em operacoes de alto fluxo, reduzir segundos por veiculo e dar
-                  mais autonomia ao usuario pode gerar impacto direto na fluidez
-                  da saida, no volume de chamados e na percepcao de eficiencia da
-                  marca.
-                </p>
+                {caseText.impactIntro.paragraphs.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
               </div>
 
               <p className="mt-7 border-l border-[#BDBDBD] pl-5 text-left text-sm font-semibold leading-7 text-[#303030] md:text-base md:leading-8">
-                A proposta e demonstrar um impacto projetado de produto mais
-                claro, rastreavel e simples para validacao de pagamento em
-                contexto presencial.
+                {caseText.impactIntro.note}
               </p>
             </motion.div>
           </div>
@@ -809,21 +616,13 @@ export default function ParkingPixPage() {
               className="max-w-[540px]"
             >
               <h2 className="text-left text-[36px] font-bold leading-[1] tracking-[-0.035em] text-[#303030] md:text-[44px] lg:text-[48px]">
-                Aprendizados
+                {common.learnings}
               </h2>
 
               <div className="mt-7 space-y-5 text-left text-base leading-8 text-[#686868] md:text-xl md:leading-9">
-                <p>
-                  O ParkingPix reforca que solucoes simples podem ter grande
-                  impacto quando atacam o ponto certo da jornada.
-                </p>
-
-                <p>
-                  Em produtos operacionais, a experiencia nao precisa ser
-                  complexa para gerar valor. Ela precisa reduzir duvida, deixar
-                  o proximo passo claro e dar seguranca para que o usuario
-                  conclua a acao sem depender de suporte.
-                </p>
+                {caseText.learningsIntro.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
               </div>
             </motion.div>
 
@@ -846,7 +645,7 @@ export default function ParkingPixPage() {
                 >
                   <div>
                     <span className="text-xs font-semibold uppercase tracking-[0.16em] text-[#9A9A9A]">
-                      Aprendizado
+                      {common.learningLabel}
                     </span>
 
                     <h3 className="mt-4 text-[26px] font-bold leading-[1.05] tracking-[-0.035em] text-[#303030] md:text-[30px]">
@@ -873,22 +672,13 @@ export default function ParkingPixPage() {
               className="rounded-[32px] border border-[#DADADA] bg-[#F7F7F7] p-8 text-center shadow-[0_24px_70px_rgba(48,48,48,0.08)] md:p-12"
             >
               <h2 className="text-center text-[32px] font-bold leading-[1] tracking-[-0.035em] text-[#303030] md:text-[40px] lg:text-[44px]">
-                Confidencialidade
+                {common.confidentiality}
               </h2>
 
               <div className="mx-auto mt-7 max-w-[760px] space-y-5 text-center text-base leading-8 text-[#686868] md:text-lg md:leading-8">
-                <p>
-                  Por se tratar de uma solucao de pagamento e operacao
-                  presencial, este case preserva dados, placas, valores,
-                  clientes, tickets, comprovantes e informacoes operacionais.
-                </p>
-
-                <p>
-                  As telas apresentadas podem utilizar mockups, dados simulados
-                  ou placeholders. O objetivo e demonstrar estrutura da
-                  experiencia e decisoes de produto sem revelar informacoes
-                  confidenciais.
-                </p>
+                {caseText.confidentiality.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
               </div>
 
               <div className="mt-9 flex justify-center">
@@ -896,7 +686,7 @@ export default function ParkingPixPage() {
                   href={`${basePath}/portfolio`}
                   className="btn-soft-3d h-[46px] min-w-[210px] px-[26px]"
                 >
-                  Voltar para projetos
+                  {common.backToProjects}
                 </a>
               </div>
             </motion.div>

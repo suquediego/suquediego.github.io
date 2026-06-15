@@ -5,12 +5,14 @@ import { useRef, useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { SafeImage } from "@/components/safe-image";
 import type { Work } from "@/data/works";
+import { useTranslation } from "@/hooks/use-translation";
 
 type WorkCardProps = {
   work: Work;
 };
 
 export function WorkCard({ work }: WorkCardProps) {
+  const t = useTranslation();
   const cardRef = useRef<HTMLAnchorElement | null>(null);
   const [visible, setVisible] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -23,6 +25,7 @@ export function WorkCard({ work }: WorkCardProps) {
         : work.title === "ParkingPix"
           ? "xl:order-3"
           : "";
+  const workText = t.works.items[work.translationKey];
 
   function handleMouseMove(event: React.MouseEvent<HTMLAnchorElement>) {
     if (!cardRef.current) return;
@@ -84,20 +87,20 @@ export function WorkCard({ work }: WorkCardProps) {
 
         <div className="px-4 pb-5 pt-5">
           <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#777777] transition-colors duration-300 group-hover:text-[#5F5F5F]">
-            {work.category}
+            {workText.category}
           </p>
 
           <h3 className="mt-3 text-[25px] font-black leading-[0.95] tracking-[-0.045em] text-[#787878] transition-colors duration-300 group-hover:text-[#202020]">
-            {work.title}
+            {workText.title}
           </h3>
 
           <p className="mt-4 min-h-[78px] text-[14px] font-normal leading-[1.55] text-[#727272] transition-colors duration-300 group-hover:text-[#5F5F5F]">
-            {work.description}
+            {workText.description}
           </p>
 
           <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
             <span className="inline-flex h-[48px] min-w-[142px] items-center justify-center rounded-[30px] border border-[#8F9092] bg-[linear-gradient(to_top,#D8D9DB_0%,#fff_80%,#FDFDFD_100%)] px-5 text-[14px] font-semibold text-[#606060] shadow-none outline-none transition-all duration-300 [text-shadow:0_1px_#fff] hover:text-[#303030] hover:shadow-[0_4px_3px_1px_#FCFCFC,0_6px_8px_#D6D7D9,0_-4px_4px_#CECFD1,0_-6px_4px_#FEFEFE,inset_0_0_3px_3px_#CECFD1] sm:min-w-[150px] sm:px-6">
-              {work.ctaLabel ?? "Ver projeto"}
+              {"ctaLabel" in workText ? workText.ctaLabel : t.works.defaultCta}
             </span>
 
             <span className="grid size-11 place-items-center rounded-full border border-[#8F9092] bg-[linear-gradient(to_top,#D8D9DB_0%,#fff_80%,#FDFDFD_100%)] text-[#606060] shadow-none outline-none transition-all duration-300 hover:translate-x-1 hover:text-[#202020] hover:shadow-[0_4px_3px_1px_#FCFCFC,0_6px_8px_#D6D7D9,0_-4px_4px_#CECFD1,0_-6px_4px_#FEFEFE,inset_0_0_3px_3px_#CECFD1] active:shadow-[0_4px_3px_1px_#FCFCFC,0_6px_8px_#D6D7D9,0_-4px_4px_#CECFD1,0_-6px_4px_#FEFEFE,inset_0_0_5px_3px_#999,inset_0_0_30px_#aaa]">

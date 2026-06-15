@@ -3,22 +3,24 @@
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import { LanguageToggle } from "@/components/language-toggle";
 import { SafeImage } from "@/components/safe-image";
+import { useTranslation } from "@/hooks/use-translation";
 import { basePath } from "@/lib/base-path";
 
 const navLinks = [
-  { label: "Projetos", href: "/portfolio" },
-  { label: "Sobre", href: "/sobre" },
-  { label: "Front-end", href: "/front-end" },
-  { label: "Contato", href: "/contato" },
-];
+  { labelKey: "projects", href: "/portfolio" },
+  { labelKey: "about", href: "/sobre" },
+  { labelKey: "frontend", href: "/front-end" },
+  { labelKey: "contact", href: "/contato" },
+] as const;
 
 const mobileNavLinks = [
-  { label: "Portfólio", href: "/portfolio" },
-  { label: "Sobre", href: "/sobre" },
-  { label: "Front-end", href: "/front-end" },
-  { label: "Contato", href: "/contato" },
-];
+  { labelKey: "portfolio", href: "/portfolio" },
+  { labelKey: "about", href: "/sobre" },
+  { labelKey: "frontend", href: "/front-end" },
+  { labelKey: "contact", href: "/contato" },
+] as const;
 
 function GitHubIcon({ className }: { className?: string }) {
   return (
@@ -93,6 +95,7 @@ const mobileMenuLinkClass =
 
 export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const t = useTranslation();
 
   function closeMobileMenu() {
     setIsMobileMenuOpen(false);
@@ -101,11 +104,11 @@ export function Navbar() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 bg-[#e8e8e8]">
       <nav
-        aria-label="Navegação principal"
+        aria-label={t.nav.ariaLabel}
         className="mx-auto flex h-[104px] max-w-[1320px] items-center justify-between px-6 md:px-10"
       >
         <a
-          href={`${basePath || ""}/#hero`}
+          href={`${basePath || ""}/`}
           className={logoButtonClass}
           aria-label="Diego Suque"
         >
@@ -124,29 +127,33 @@ export function Navbar() {
         <div className="hidden items-center gap-4 lg:flex">
           {navLinks.map((link) => (
             <Link key={link.href} href={link.href} className={navButtonClass}>
-              {link.label}
+              {t.nav.links[link.labelKey]}
             </Link>
           ))}
         </div>
 
-        <div className="hidden items-center gap-4 lg:flex">
-          {socialLinks.map(({ label, href, icon: Icon }) => (
-            <Link
-              key={label}
-              href={href}
-              target="_blank"
-              rel="noreferrer"
-              aria-label={label}
-              className={iconButtonClass}
-            >
-              <Icon className="h-[24px] w-[24px]" />
-            </Link>
-          ))}
+        <div className="hidden items-center gap-5 lg:flex">
+          <div className="flex items-center gap-3">
+            {socialLinks.map(({ label, href, icon: Icon }) => (
+              <Link
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={label}
+                className={iconButtonClass}
+              >
+                <Icon className="h-[24px] w-[24px]" />
+              </Link>
+            ))}
+          </div>
+
+          <LanguageToggle />
         </div>
 
         <button
           type="button"
-          aria-label={isMobileMenuOpen ? "Fechar menu" : "Abrir menu"}
+          aria-label={isMobileMenuOpen ? t.nav.closeMenu : t.nav.openMenu}
           aria-expanded={isMobileMenuOpen}
           aria-controls="mobile-navigation"
           className={`${mobileMenuButtonClass} lg:hidden`}
@@ -173,7 +180,7 @@ export function Navbar() {
                 className={mobileMenuLinkClass}
                 onClick={closeMobileMenu}
               >
-                {link.label}
+                {t.nav.links[link.labelKey]}
               </Link>
             ))}
 
@@ -191,6 +198,12 @@ export function Navbar() {
                 {label}
               </a>
             ))}
+
+            <div className="my-1 h-px bg-[#D0D0D0]" />
+
+            <div className="flex min-h-[46px] items-center justify-center rounded-[18px] border border-[#DDDDDD] bg-[#F7F7F7] px-5">
+              <LanguageToggle />
+            </div>
           </div>
         </div>
       ) : null}

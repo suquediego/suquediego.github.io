@@ -6,6 +6,7 @@ import type { MouseEvent } from "react";
 
 import { PageShell } from "@/components/page-shell";
 import { SafeImage } from "@/components/safe-image";
+import { useTranslation } from "@/hooks/use-translation";
 import { basePath } from "@/lib/base-path";
 
 type TiltState = {
@@ -33,75 +34,6 @@ const heimdallImages = {
   relationalSearch: `${basePath}/images/heimdall/heimdall-pesquisa-relacional.png`,
   search: `${basePath}/images/heimdall/heimdall-pesquisa.png`,
 };
-
-const painCards = [
-  {
-    title: "Consulta fragmentada",
-    description:
-      "Analistas precisavam alternar entre fontes, planilhas e consultas manuais para montar uma visão completa.",
-  },
-  {
-    title: "Dados sensíveis dispersos",
-    description:
-      "Vínculos, histórico, exposição política e inconsistências ficavam espalhados em leituras pouco conectadas.",
-  },
-  {
-    title: "Baixa rastreabilidade",
-    description:
-      "Consultas e evidências precisavam ser recuperadas com mais contexto para justificar decisões em cenários regulados.",
-  },
-  {
-    title: "Decisão pouco acionável",
-    description:
-      "Dados brutos exigiam interpretação manual antes de virar uma aprovação, reprovação ou investigação adicional.",
-  },
-];
-
-const impactCards = [
-  {
-    metric: "Análise centralizada",
-    description:
-      "Dados cadastrais, vínculos, histórico e sinais de risco reunidos em uma mesma jornada de investigação.",
-  },
-  {
-    metric: "Mais velocidade",
-    description:
-      "Analistas conseguem partir de uma consulta simples para uma leitura mais profunda sem perder contexto.",
-  },
-  {
-    metric: "Mais rastreabilidade",
-    description:
-      "Consultas, fontes e evidências ficam mais organizadas para apoiar decisões justificáveis.",
-  },
-  {
-    metric: "Apoio ao risco",
-    description:
-      "A experiência ajuda compliance, fraude e risco a identificar inconsistências e relações relevantes.",
-  },
-];
-
-const learningCards = [
-  {
-    title: "Sinal não é decisão",
-    description:
-      "A interface precisa separar evidência, contexto e ação para evitar conclusões precipitadas.",
-  },
-  {
-    title: "Risco precisa de contexto",
-    description:
-      "Validação cadastral fica mais útil quando o usuário entende origem, histórico, vínculos e recorrência.",
-  },
-  {
-    title: "Clareza protege a decisão",
-    description:
-      "Produtos de KYC precisam tornar dados sensíveis compreensíveis sem simplificar demais o risco.",
-  },
-  {
-    title: "Investigação deve ser rastreável",
-    description:
-      "Cada consulta precisa ajudar o time a reconstruir o caminho da análise com segurança operacional.",
-  },
-];
 
 function BrowserMockup() {
   const [tilt, setTilt] = useState<TiltState>({ rotateX: 0, rotateY: 0 });
@@ -271,6 +203,13 @@ function StaticBrowserMockup({
 }
 
 export default function HeimdallPage() {
+  const t = useTranslation();
+  const common = t.cases.common;
+  const caseText = t.cases.heimdall;
+  const painCards = caseText.painCards;
+  const impactCards = caseText.impactCards;
+  const learningCards = caseText.learningCards;
+
   return (
     <PageShell variant="case">
       <article className="bg-white text-[#303030]">
@@ -285,14 +224,11 @@ export default function HeimdallPage() {
               className="max-w-[560px] pt-2 lg:pt-20"
             >
               <h1 className="text-left text-[38px] font-black leading-[0.98] tracking-[-0.045em] text-[#303030] md:text-[48px] lg:text-[54px]">
-                Heimdall: inteligência de KYC para validação e risco
-                operacional
+                {caseText.hero.title}
               </h1>
 
               <p className="mt-7 max-w-[520px] text-left text-base leading-8 text-[#727272] md:text-xl md:leading-9">
-                Plataforma de análise cadastral criada para apoiar times de
-                compliance, fraude e risco na validação de pessoas e empresas
-                com mais velocidade, rastreabilidade e segurança.
+                {caseText.hero.description}
               </p>
             </motion.div>
 
@@ -320,23 +256,13 @@ export default function HeimdallPage() {
               className="max-w-[540px]"
             >
               <h2 className="text-left text-[36px] font-bold leading-[1] tracking-[-0.035em] text-[#303030] md:text-[44px] lg:text-[48px]">
-                Visão geral
+                {common.overview}
               </h2>
 
               <div className="mt-7 space-y-5 text-left text-base leading-8 text-[#686868] md:text-xl md:leading-9">
-                <p>
-                  O Heimdall é uma solução de KYC e análise cadastral voltada
-                  para operações que precisam validar identidades, investigar
-                  vínculos e tomar decisões com base em dados confiáveis.
-                </p>
-
-                <p>
-                  A plataforma centraliza informações de diferentes fontes em
-                  uma interface única, reduzindo a necessidade de alternar entre
-                  sistemas, planilhas e consultas manuais durante uma análise.
-                  Com isso, analistas conseguem identificar inconsistências e
-                  construir uma visão mais completa sobre pessoas e empresas.
-                </p>
+                {caseText.overview.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
               </div>
             </motion.div>
           </div>
@@ -351,24 +277,13 @@ export default function HeimdallPage() {
               className="max-w-[540px]"
             >
               <h2 className="text-left text-[36px] font-bold leading-[1] tracking-[-0.035em] text-[#303030] md:text-[44px] lg:text-[48px]">
-                Contexto do produto
+                {common.productContext}
               </h2>
 
               <div className="mt-7 space-y-5 text-left text-base leading-8 text-[#686868] md:text-xl md:leading-9">
-                <p>
-                  Em operações financeiras e reguladas, validar um CPF ou CNPJ
-                  não é apenas confirmar dados básicos. É preciso entender
-                  histórico, vínculos, exposição política, relações
-                  empresariais, sinais de fraude e possíveis inconsistências.
-                </p>
-
-                <p>
-                  Antes de uma experiência centralizada, esse processo tende a
-                  ser fragmentado. O Heimdall foi pensado para organizar essa
-                  complexidade em uma jornada mais fluida, permitindo que o
-                  analista saia de uma consulta simples para uma investigação
-                  mais profunda sem perder contexto.
-                </p>
+                {caseText.productContext.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
               </div>
             </motion.div>
 
@@ -404,22 +319,13 @@ export default function HeimdallPage() {
               className="max-w-[540px]"
             >
               <h2 className="text-left text-[36px] font-bold leading-[1] tracking-[-0.035em] text-[#303030] md:text-[44px] lg:text-[48px]">
-                Visão macro e detalhe
+                {caseText.macroDetail.title}
               </h2>
 
               <div className="mt-7 space-y-5 text-left text-base leading-8 text-[#686868] md:text-xl md:leading-9">
-                <p>
-                  A experiência foi desenhada para funcionar em dois níveis:
-                  visão macro para leitura rápida do risco e visão detalhada
-                  para investigação aprofundada.
-                </p>
-
-                <p>
-                  No primeiro contato, o analista precisa entender rapidamente
-                  se aquele cadastro apresenta sinais de atenção. Em seguida,
-                  precisa acessar dados consolidados, vínculos, histórico,
-                  fontes consultadas e evidências que sustentem a decisão.
-                </p>
+                {caseText.macroDetail.paragraphs.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
               </div>
             </motion.div>
           </div>
@@ -435,23 +341,13 @@ export default function HeimdallPage() {
               className="max-w-[540px]"
             >
               <h2 className="text-left text-[36px] font-bold leading-[1] tracking-[-0.035em] text-[#303030] md:text-[44px] lg:text-[48px]">
-                Contexto operacional
+                {common.operationalContext}
               </h2>
 
               <div className="mt-7 space-y-5 text-left text-base leading-8 text-[#686868] md:text-xl md:leading-9">
-                <p>
-                  O Heimdall atende uma rotina em que velocidade e precisão
-                  precisam andar juntas. Analistas lidam com múltiplas
-                  consultas, diferentes níveis de risco e decisões que precisam
-                  ser justificáveis.
-                </p>
-
-                <p>
-                  Nesse cenário, a interface não poderia apenas exibir dados.
-                  Ela precisava organizar a investigação, indicar prioridade,
-                  reduzir dúvidas e apoiar decisões auditáveis para analistas,
-                  gestores e áreas responsáveis por conformidade.
-                </p>
+                {caseText.operationalContext.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
               </div>
             </motion.div>
 
@@ -486,7 +382,7 @@ export default function HeimdallPage() {
                 >
                   <div>
                     <span className="text-xs font-semibold uppercase tracking-[0.16em] text-[#9A9A9A]">
-                      Dor operacional
+                      {common.operationalContext}
                     </span>
 
                     <h3 className="mt-4 text-[26px] font-bold leading-[1.05] tracking-[-0.035em] text-[#303030] md:text-[30px]">
@@ -509,24 +405,13 @@ export default function HeimdallPage() {
               className="max-w-[540px]"
             >
               <h2 className="text-left text-[36px] font-bold leading-[1] tracking-[-0.035em] text-[#303030] md:text-[44px] lg:text-[48px]">
-                Principais dores
+                {common.mainPainPoints}
               </h2>
 
               <div className="mt-7 space-y-5 text-left text-base leading-8 text-[#686868] md:text-xl md:leading-9">
-                <p>
-                  As principais dores estavam ligadas à fragmentação da análise
-                  e à dificuldade de transformar dados brutos em decisão.
-                  Analistas precisavam consultar múltiplas fontes para montar um
-                  perfil completo, aumentando tempo de investigação e risco de
-                  omissões.
-                </p>
-
-                <p>
-                  Sinais importantes como vínculos empresariais, relações
-                  familiares, exposição política, histórico de endereços e
-                  inconsistências cadastrais ficavam espalhados, dificultando uma
-                  leitura rápida do risco.
-                </p>
+                {caseText.painPointsIntro.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
               </div>
             </motion.div>
           </div>
@@ -542,27 +427,17 @@ export default function HeimdallPage() {
               className="max-w-[540px]"
             >
               <h2 className="text-left text-[36px] font-bold leading-[1] tracking-[-0.035em] text-[#303030] md:text-[44px] lg:text-[48px]">
-                O desafio de design
+                {common.designChallenge}
               </h2>
 
               <div className="mt-7 space-y-5 text-left text-base leading-8 text-[#686868] md:text-xl md:leading-9">
-                <p>
-                  O principal desafio foi transformar uma massa de dados
-                  cadastrais, relacionais e operacionais em uma experiência
-                  compreensível para quem precisa tomar decisões rápidas.
-                </p>
-
-                <p>
-                  A interface precisava entregar profundidade sem sobrecarregar
-                  o usuário, organizando informações sensíveis de forma clara,
-                  hierárquica e acionável para compliance, fraude e risco.
-                </p>
+                {caseText.challenge.paragraphs.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
               </div>
 
               <p className="mt-7 border-l border-[#BDBDBD] pl-5 text-left text-sm font-semibold leading-7 text-[#303030] md:text-base md:leading-8">
-                O desafio não era apenas mostrar mais dados, mas ajudar o
-                analista a entender o que exigia atenção, quais vínculos
-                poderiam indicar risco e quais evidências sustentavam a decisão.
+                {caseText.challenge.note}
               </p>
             </motion.div>
 
@@ -594,23 +469,13 @@ export default function HeimdallPage() {
               className="max-w-[540px]"
             >
               <h2 className="text-left text-[36px] font-bold leading-[1] tracking-[-0.035em] text-[#303030] md:text-[44px] lg:text-[48px]">
-                Meu papel
+                {common.myRole}
               </h2>
 
               <div className="mt-7 space-y-5 text-left text-base leading-8 text-[#686868] md:text-xl md:leading-9">
-                <p>
-                  Atuei na estruturação da experiência e da interface do
-                  Heimdall, organizando a jornada de análise cadastral desde a
-                  consulta inicial até a leitura dos dados consolidados e sinais
-                  de risco.
-                </p>
-
-                <p>
-                  O trabalho envolveu transformar informações técnicas e
-                  sensíveis em telas mais claras, com hierarquia visual,
-                  organização de conteúdo e fluxos pensados para reduzir esforço
-                  operacional para analistas, gestores e compliance.
-                </p>
+                {caseText.role.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
               </div>
             </motion.div>
           </div>
@@ -625,22 +490,13 @@ export default function HeimdallPage() {
               className="max-w-[540px]"
             >
               <h2 className="text-left text-[36px] font-bold leading-[1] tracking-[-0.035em] text-[#303030] md:text-[44px] lg:text-[48px]">
-                Consulta e validação
+                {caseText.validation.title}
               </h2>
 
               <div className="mt-7 space-y-5 text-left text-base leading-8 text-[#686868] md:text-xl md:leading-9">
-                <p>
-                  A consulta cadastral foi pensada como o ponto de entrada da
-                  análise. O objetivo era permitir que o analista encontrasse
-                  pessoas ou empresas com rapidez, usando CPF ou CNPJ, sem
-                  alternar entre diferentes ferramentas.
-                </p>
-
-                <p>
-                  A partir da busca, o sistema direciona o usuário para uma
-                  visão consolidada, reunindo dados cadastrais, contatos,
-                  endereços, vínculos e informações relevantes para a validação.
-                </p>
+                {caseText.validation.paragraphs.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
               </div>
             </motion.div>
 
@@ -672,22 +528,13 @@ export default function HeimdallPage() {
               className="max-w-[540px]"
             >
               <h2 className="text-left text-[36px] font-bold leading-[1] tracking-[-0.035em] text-[#303030] md:text-[44px] lg:text-[48px]">
-                Sinais de risco
+                {caseText.riskSignals.title}
               </h2>
 
               <div className="mt-7 space-y-5 text-left text-base leading-8 text-[#686868] md:text-xl md:leading-9">
-                <p>
-                  Além de apresentar dados cadastrais, o Heimdall precisava
-                  destacar sinais que exigem atenção durante a análise.
-                </p>
-
-                <p>
-                  Informações como exposição política, vínculos empresariais,
-                  relações indiretas, histórico de dados e inconsistências
-                  ajudam o analista a interpretar melhor o contexto de cada
-                  pessoa ou empresa sem transformar a interface em um painel
-                  excessivamente técnico.
-                </p>
+                {caseText.riskSignals.paragraphs.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
               </div>
             </motion.div>
           </div>
@@ -703,49 +550,26 @@ export default function HeimdallPage() {
               className="max-w-[540px]"
             >
               <h2 className="text-left text-[36px] font-bold leading-[1] tracking-[-0.035em] text-[#303030] md:text-[44px] lg:text-[48px]">
-                Decisões de design
+                {common.designDecisions}
               </h2>
 
               <div className="mt-7 space-y-5 text-left text-base leading-8 text-[#686868] md:text-xl md:leading-9">
-                <p>
-                  As principais decisões de design foram guiadas por três
-                  objetivos: clareza, rastreabilidade e velocidade de análise.
-                </p>
+                {caseText.designDecisions.paragraphs.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
               </div>
 
               <div className="mt-8 space-y-6 text-left">
-                <div>
+                {caseText.designDecisions.cards.map((card) => (
+                <div key={card.title}>
                   <h3 className="text-lg font-bold leading-6 tracking-[-0.02em] text-[#303030] md:text-xl">
-                    Leitura progressiva
+                    {card.title}
                   </h3>
                   <p className="mt-2 text-sm leading-7 text-[#686868] md:text-base md:leading-8">
-                    A interface apresenta primeiro o essencial e permite
-                    aprofundar em dados, vínculos e evidências conforme a
-                    necessidade da investigação.
+                    {card.description}
                   </p>
                 </div>
-
-                <div>
-                  <h3 className="text-lg font-bold leading-6 tracking-[-0.02em] text-[#303030] md:text-xl">
-                    Linguagem sóbria
-                  </h3>
-                  <p className="mt-2 text-sm leading-7 text-[#686868] md:text-base md:leading-8">
-                    O produto precisava transmitir confiança e critério por
-                    lidar com dados sensíveis, compliance e tomada de decisão em
-                    ambientes regulados.
-                  </p>
-                </div>
-
-                <div>
-                  <h3 className="text-lg font-bold leading-6 tracking-[-0.02em] text-[#303030] md:text-xl">
-                    Risco com evidência
-                  </h3>
-                  <p className="mt-2 text-sm leading-7 text-[#686868] md:text-base md:leading-8">
-                    Dados cadastrais, vínculos e histórico foram organizados
-                    para ajudar o analista a entender o que sustenta cada
-                    aprovação, reprovação ou investigação adicional.
-                  </p>
-                </div>
+                ))}
               </div>
             </motion.div>
 
@@ -780,7 +604,7 @@ export default function HeimdallPage() {
                 >
                   <div>
                     <span className="text-xs font-semibold uppercase tracking-[0.16em] text-[#9A9A9A]">
-                      Impacto percebido
+                      {common.impact}
                     </span>
 
                     <h3 className="mt-4 text-[26px] font-bold leading-[1.05] tracking-[-0.035em] text-[#303030] md:text-[30px]">
@@ -803,29 +627,17 @@ export default function HeimdallPage() {
               className="max-w-[540px]"
             >
               <h2 className="text-left text-[36px] font-bold leading-[1] tracking-[-0.035em] text-[#303030] md:text-[44px] lg:text-[48px]">
-                Impacto
+                {common.impact}
               </h2>
 
               <div className="mt-7 space-y-5 text-left text-base leading-8 text-[#686868] md:text-xl md:leading-9">
-                <p>
-                  O impacto previsto para o Heimdall está ligado à redução da
-                  dispersão na análise cadastral. Ao reunir dados, vínculos,
-                  histórico e sinais de risco em uma mesma jornada, a plataforma
-                  apoia uma rotina de KYC mais clara e rastreável.
-                </p>
-
-                <p>
-                  A experiência busca dar mais autonomia para analistas,
-                  gestores e times de compliance, fraude e risco, reduzindo
-                  ambiguidade e ajudando o usuário a transformar dados
-                  cadastrais em decisões mais seguras.
-                </p>
+                {caseText.impactIntro.paragraphs.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
               </div>
 
               <p className="mt-7 border-l border-[#BDBDBD] pl-5 text-left text-sm font-semibold leading-7 text-[#303030] md:text-base md:leading-8">
-                A proposta não é afirmar resultado numérico, mas demonstrar uma
-                direção de produto mais rastreável, acionável e consistente para
-                validação, investigação e risco operacional.
+                {caseText.impactIntro.note}
               </p>
             </motion.div>
           </div>
@@ -841,23 +653,13 @@ export default function HeimdallPage() {
               className="max-w-[540px]"
             >
               <h2 className="text-left text-[36px] font-bold leading-[1] tracking-[-0.035em] text-[#303030] md:text-[44px] lg:text-[48px]">
-                Aprendizados
+                {common.learnings}
               </h2>
 
               <div className="mt-7 space-y-5 text-left text-base leading-8 text-[#686868] md:text-xl md:leading-9">
-                <p>
-                  Produtos de KYC exigem uma interface que organize complexidade
-                  com responsabilidade. Dados sensíveis precisam ser legíveis,
-                  mas também precisam preservar contexto, critério e segurança
-                  operacional.
-                </p>
-
-                <p>
-                  O aprendizado principal é que uma boa experiência de análise
-                  cadastral não apenas mostra informações: ela ajuda o usuário a
-                  interpretar sinais, recuperar contexto e justificar decisões
-                  em cenários regulados.
-                </p>
+                {caseText.learningsIntro.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
               </div>
             </motion.div>
 
@@ -880,7 +682,7 @@ export default function HeimdallPage() {
                 >
                   <div>
                     <span className="text-xs font-semibold uppercase tracking-[0.16em] text-[#9A9A9A]">
-                      Aprendizado
+                      {common.learningLabel}
                     </span>
 
                     <h3 className="mt-4 text-[26px] font-bold leading-[1.05] tracking-[-0.035em] text-[#303030] md:text-[30px]">
@@ -907,22 +709,13 @@ export default function HeimdallPage() {
               className="rounded-[32px] border border-[#DADADA] bg-[#F7F7F7] p-8 text-center shadow-[0_24px_70px_rgba(48,48,48,0.08)] md:p-12"
             >
               <h2 className="text-center text-[32px] font-bold leading-[1] tracking-[-0.035em] text-[#303030] md:text-[40px] lg:text-[44px]">
-                Confidencialidade
+                {common.confidentiality}
               </h2>
 
               <div className="mx-auto mt-7 max-w-[760px] space-y-5 text-center text-base leading-8 text-[#686868] md:text-lg md:leading-8">
-                <p>
-                  Por se tratar de uma solução de KYC e análise de risco, este
-                  case preserva CPFs, nomes, documentos, clientes, consultas,
-                  critérios internos e dados sensíveis da operação.
-                </p>
-
-                <p>
-                  As telas apresentadas podem utilizar mockups, dados simulados
-                  ou placeholders. O objetivo é demonstrar estrutura de
-                  experiência, hierarquia de informação e decisões de produto
-                  sem revelar informações confidenciais.
-                </p>
+                {caseText.confidentiality.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
               </div>
 
               <div className="mt-9 flex justify-center">
@@ -930,7 +723,7 @@ export default function HeimdallPage() {
                   href={`${basePath}/portfolio`}
                   className="btn-soft-3d h-[46px] min-w-[210px] px-[26px]"
                 >
-                  Voltar para projetos
+                  {common.backToProjects}
                 </a>
               </div>
             </motion.div>

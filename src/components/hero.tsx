@@ -9,6 +9,7 @@ import {
   useTransform,
 } from "framer-motion";
 import { SafeImage } from "@/components/safe-image";
+import { useTranslation } from "@/hooks/use-translation";
 import { basePath } from "@/lib/base-path";
 
 const CODER_HERO_IMAGE = `${basePath}/images/portfolio/dev-hero-3.png`;
@@ -17,6 +18,7 @@ const DESIGNER_HERO_IMAGE = `${basePath}/images/portfolio/suque-hero.png`;
 const heroButtonClass = "btn-soft-3d";
 
 export function Hero() {
+  const t = useTranslation();
   const mouse = useMotionValue(50);
 
   const smoothMouse = useSpring(mouse, {
@@ -97,21 +99,21 @@ export function Hero() {
         <div className="grid w-full grid-cols-2 items-end gap-4">
           <div className="text-left">
             <p className="mb-2 text-[10px] font-black uppercase tracking-[0.28em] text-[#A8A8A8]">
-              Product
+              {t.hero.productLabel}
             </p>
 
             <h1 className="text-[42px] font-black leading-[0.92] tracking-[-0.055em] text-[#303030]">
-              designer
+              {t.hero.designerTitle}
             </h1>
           </div>
 
           <div className="text-right">
             <p className="mb-2 text-[10px] font-black uppercase tracking-[0.28em] text-[#A8A8A8]">
-              Interface
+              {t.hero.interfaceLabel}
             </p>
 
             <h2 className="whitespace-nowrap text-[38px] font-black leading-[0.92] tracking-[-0.055em] text-[#303030]">
-              {"<coder>"}
+              {t.hero.coderTitle}
             </h2>
           </div>
         </div>
@@ -150,23 +152,21 @@ export function Hero() {
 
         <div className="mt-5 grid gap-3 text-center">
           <p className="mx-auto max-w-[360px] text-[15px] font-normal leading-[1.55] text-[#727272]">
-            Crio interfaces para produtos digitais complexos, unindo UX, UI e
-            design systems.
+            {t.hero.designerText}
           </p>
 
           <p className="mx-auto max-w-[360px] text-[15px] font-normal leading-[1.55] text-[#727272]">
-            Construo interfaces responsivas com foco em clareza, estrutura e
-            implementação.
+            {t.hero.coderText}
           </p>
         </div>
 
         <div className="mt-6 flex w-full flex-col items-center gap-3 min-[390px]:flex-row min-[390px]:justify-center">
           <Link href="/portfolio" className={heroButtonClass}>
-            Ver portfólio
+            {t.hero.portfolioCta}
           </Link>
 
           <Link href="/front-end" className={heroButtonClass}>
-            Ver front-end
+            {t.hero.frontendCta}
           </Link>
         </div>
       </div>
@@ -183,16 +183,15 @@ export function Hero() {
           }}
         >
           <p className="mb-4 text-[11px] font-black uppercase tracking-[0.34em] text-[#A8A8A8]">
-            Interface
+            {t.hero.interfaceLabel}
           </p>
 
           <motion.h2 className="whitespace-nowrap text-[48px] font-black leading-[0.92] tracking-[-0.055em] text-[#303030] sm:text-[66px] lg:text-[82px] xl:text-[88px]">
-            {"<coder>"}
+            {t.hero.coderTitle}
           </motion.h2>
 
           <p className="mx-auto mt-5 max-w-[390px] text-[16px] font-normal leading-[1.65] text-[#727272] sm:text-[17px] md:mx-0">
-            Construo interfaces responsivas com foco em clareza, estrutura e
-            implementação.
+            {t.hero.coderText}
           </p>
 
           <motion.div
@@ -200,7 +199,7 @@ export function Hero() {
             style={{ opacity: coderCtaOpacity, y: coderCtaY }}
           >
             <Link href="/front-end" className={heroButtonClass}>
-              Ver front-end
+              {t.hero.frontendCta}
             </Link>
           </motion.div>
         </motion.div>
@@ -254,16 +253,15 @@ export function Hero() {
           }}
         >
           <p className="mb-4 text-[11px] font-black uppercase tracking-[0.34em] text-[#A8A8A8]">
-            Product
+            {t.hero.productLabel}
           </p>
 
           <motion.h1 className="text-[52px] font-black leading-[0.92] tracking-[-0.055em] text-[#303030] sm:text-[66px] lg:text-[82px] xl:text-[88px]">
-            designer
+            {t.hero.designerTitle}
           </motion.h1>
 
           <p className="mx-auto mt-5 max-w-[390px] text-[16px] font-normal leading-[1.65] text-[#727272] sm:text-[17px] md:mx-0 md:ml-auto">
-            Crio interfaces para produtos digitais complexos, unindo UX, UI e
-            design systems.
+            {t.hero.designerText}
           </p>
 
           <motion.div
@@ -271,7 +269,7 @@ export function Hero() {
             style={{ opacity: designerCtaOpacity, y: designerCtaY }}
           >
             <Link href="/portfolio" className={heroButtonClass}>
-              Ver portfólio
+              {t.hero.portfolioCta}
             </Link>
           </motion.div>
         </motion.div>

@@ -1,26 +1,30 @@
+"use client";
+
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { PageShell } from "@/components/page-shell";
 import { WorkCard } from "@/components/work-card";
 import { works } from "@/data/works";
+import { useTranslation } from "@/hooks/use-translation";
 
 const otherProjects = ["Caronte", "Vale Pix", "Prize Tech", "Payco", "Jobs.bet"];
 
 export default function PortfolioPage() {
+  const t = useTranslation();
+
   return (
     <PageShell>
       <section className="mx-auto max-w-[1180px]">
         <p className="text-[11px] font-black uppercase tracking-[0.34em] text-[#777777]">
-          Portfolio
+          {t.pages.portfolio.eyebrow}
         </p>
 
         <h1 className="mt-5 text-[56px] font-black leading-[0.92] tracking-[-0.055em] text-[#303030] sm:text-[74px] lg:text-[96px]">
-          Projetos
+          {t.pages.portfolio.title}
         </h1>
 
         <p className="mt-7 max-w-[780px] text-[18px] leading-[1.7] text-[#727272] sm:text-[20px]">
-          Uma seleção de produtos digitais, interfaces e experiências criadas
-          para contextos financeiros, operacionais e digitais.
+          {t.pages.portfolio.description}
         </p>
       </section>
 
@@ -35,7 +39,7 @@ export default function PortfolioPage() {
       <section className="mx-auto mt-20 max-w-[1180px]">
         <div className="mb-8 flex items-center gap-8">
           <h2 className="shrink-0 text-[32px] font-black leading-none tracking-[-0.045em] text-[#303030]">
-            Outros projetos
+            {t.pages.portfolio.otherProjectsTitle}
           </h2>
           <div className="h-px w-full bg-[#D0D0D0]" />
         </div>
@@ -50,13 +54,13 @@ export default function PortfolioPage() {
                 {project}
               </h3>
               <p className="mt-4 text-[14px] leading-[1.6] text-[#727272]">
-                Base reservada para conteúdo, imagens e recortes do projeto.
+                {t.pages.portfolio.reservedText}
               </p>
               <Link
                 href="/portfolio"
                 className="mt-6 inline-flex items-center gap-2 text-[13px] font-semibold text-[#606060]"
               >
-                Em estruturação
+                {t.pages.portfolio.inProgress}
                 <ArrowRight className="size-4" />
               </Link>
             </article>

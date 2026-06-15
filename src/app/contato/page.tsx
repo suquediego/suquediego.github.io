@@ -1,6 +1,9 @@
+"use client";
+
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { PageShell } from "@/components/page-shell";
+import { useTranslation } from "@/hooks/use-translation";
 
 const links = [
   {
@@ -18,20 +21,21 @@ const links = [
 ];
 
 export default function ContatoPage() {
+  const t = useTranslation();
+
   return (
     <PageShell>
       <section className="mx-auto max-w-[1180px]">
         <p className="text-[11px] font-black uppercase tracking-[0.34em] text-[#777777]">
-          Conversa
+          {t.pages.contact.eyebrow}
         </p>
 
         <h1 className="mt-5 text-[56px] font-black leading-[0.92] tracking-[-0.055em] text-[#303030] sm:text-[74px] lg:text-[96px]">
-          Contato
+          {t.pages.contact.title}
         </h1>
 
         <p className="mt-7 max-w-[780px] text-[18px] leading-[1.7] text-[#727272] sm:text-[20px]">
-          Entre em contato para oportunidades, projetos, colaborações ou
-          conversas sobre produto, design e tecnologia.
+          {t.pages.contact.description}
         </p>
       </section>
 

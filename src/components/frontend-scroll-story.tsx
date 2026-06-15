@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import { useTranslation } from "@/hooks/use-translation";
 import { basePath } from "@/lib/base-path";
 
 const START_FRAME = 1;
@@ -39,11 +40,7 @@ const FRAME_PLAY_PORTION = 0.88;
 const SHOW_DEBUG = false;
 
 type FrontendStep = {
-  title: string;
-  text: string;
-  support: string;
   stack?: string[];
-  cta?: string;
   frameStart: number;
   frameEnd: number;
   avatarX: number;
@@ -65,9 +62,6 @@ type AvatarLayout = {
 
 const steps: FrontendStep[] = [
   {
-    title: "Product Design com base técnica",
-    text: "Meu foco não é apenas desenhar telas bonitas. Projeto experiências pensando em contexto, regra de negócio, clareza e execução. Ter base técnica me ajuda a tomar decisões mais próximas da realidade do produto e do time.",
-    support: "Product Designer que entende o que acontece depois do Figma.",
     stack: ["Product Design", "UX/UI", "Design System"],
     frameStart: 1,
     frameEnd: 24,
@@ -76,9 +70,6 @@ const steps: FrontendStep[] = [
     avatarScale: 0.94,
   },
   {
-    title: "Do problema à interface",
-    text: "Antes de abrir o layout, procuro entender quem usa, qual dor precisa ser resolvida, quais decisões a interface precisa facilitar e como transformar complexidade em uma experiência mais simples.",
-    support: "A tela é consequência da estratégia, não o ponto de partida.",
     stack: ["Figma", "FigJam", "Prototipação"],
     frameStart: 50,
     frameEnd: 91,
@@ -87,10 +78,6 @@ const steps: FrontendStep[] = [
     avatarScale: 0.92,
   },
   {
-    title: "Design que conversa com código",
-    text: "Trabalho pensando em componentes, estados, responsividade, acessibilidade e handoff. Entender React, Next.js, TypeScript, Tailwind e shadcn/ui me ajuda a criar interfaces mais consistentes e viáveis para implementação.",
-    support:
-      "Não é sobre vender código. É sobre desenhar melhor para produto real.",
     stack: ["React", "Next.js", "TypeScript", "Tailwind", "shadcn/ui"],
     frameStart: 103,
     frameEnd: 142,
@@ -99,9 +86,6 @@ const steps: FrontendStep[] = [
     avatarScale: 0.92,
   },
   {
-    title: "IA como acelerador de processo",
-    text: "Uso IA para explorar caminhos, organizar ideias, testar variações, estruturar fluxos, apoiar protótipos e acelerar a passagem entre intenção, interface e entrega. O critério continua sendo de design.",
-    support: "Velocidade só importa quando melhora a decisão.",
     stack: ["IA", "Prompting", "Prototipação", "Iteração rápida"],
     frameStart: 151,
     frameEnd: 197,
@@ -110,11 +94,7 @@ const steps: FrontendStep[] = [
     avatarScale: 0.9,
   },
   {
-    title: "Do Figma ao deploy, se precisar",
-    text: "Meu diferencial é atravessar melhor a distância entre design, produto e entrega. Posso desenhar a experiência, prototipar, validar caminhos e, quando necessário, colocar uma interface navegável no ar.",
-    support: "Product Design com repertório para tirar ideias do estático.",
     stack: ["Git", "GitHub", "Vercel", "Deploy"],
-    cta: "Ver projetos",
     frameStart: 199,
     frameEnd: 240,
     avatarX: 0.14,
@@ -308,6 +288,7 @@ function drawContainedImage(
 }
 
 export function FrontendScrollStory() {
+  const t = useTranslation();
   const sectionRef = useRef<HTMLElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const debugRef = useRef<HTMLDivElement>(null);
@@ -335,7 +316,10 @@ export function FrontendScrollStory() {
   const [activeStep, setActiveStep] = useState(0);
   const [isFallbackVisible, setIsFallbackVisible] = useState(false);
 
-  const activeContent = steps[activeStep];
+  const activeContent = {
+    ...steps[activeStep],
+    ...t.pages.frontend.steps[activeStep],
+  };
   const TitleTag = activeStep === 0 ? "h1" : "h2";
 
   const updateDebug = useCallback(
@@ -355,7 +339,7 @@ export function FrontendScrollStory() {
         "/front-end debug",
         `viewport: ${isMobileRef.current ? "mobile" : "desktop"}`,
         `step: ${activeStepRef.current + 1}/${steps.length}`,
-        `title: ${currentStep.title}`,
+        `title: ${t.pages.frontend.steps[activeStepRef.current].title}`,
         `global progress: ${progress.toFixed(3)}`,
         `step progress: ${stepProgress.toFixed(3)}`,
         `held progress: ${heldProgress.toFixed(3)}`,
@@ -366,7 +350,7 @@ export function FrontendScrollStory() {
         `avatarScale: ${currentStep.avatarScale}`,
       ].join("\n");
     },
-    [],
+    [t.pages.frontend.steps],
   );
 
   const drawFrame = useCallback((force = false) => {
@@ -833,7 +817,7 @@ export function FrontendScrollStory() {
         ) : (
           <canvas
             ref={canvasRef}
-            aria-label="Avatar guia da experiência front-end"
+            aria-label={t.pages.frontend.canvasLabel}
             className="pointer-events-none absolute inset-0 z-0 block h-full w-full bg-transparent"
           />
         )}
