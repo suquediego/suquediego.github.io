@@ -192,6 +192,36 @@ export const es: Translation = {
         ],
         note: "Más que diseñar pantallas, mi trabajo fue transformar una operación financiera compleja en una experiencia trazable, accionable y escalable.",
       },
+      uxResearch: {
+        title: "Investigación y estructura de UX",
+        paragraphs: [
+          "Antes de diseñar la solución visual, profundicé en cómo los equipos de operación, soporte y producto gestionaban las transacciones en su flujo diario. La investigación ocurrió de forma práctica, a partir de dudas recurrentes, puntos de fricción en la lectura de estados y dependencia del equipo técnico para investigar fallos o encontrar información crítica.",
+          "A partir de este descubrimiento, estructuré la experiencia en capas: una visión macro para monitorear la salud de la operación, una capa de búsqueda y filtros para localizar transacciones específicas, y una capa de detalle para explicar estados, etapas, motivos de error e información accionable.",
+        ],
+        note: "El objetivo fue convertir la complejidad técnica en claridad operacional, dando más autonomía a los equipos y haciendo que Vanir fuera más útil para investigación, monitoreo y toma de decisiones.",
+        cards: [
+          {
+            title: "Entendimiento operacional",
+            description:
+              "Mapeo de dudas recurrentes de operación, soporte y producto para entender dónde los usuarios encontraban fricción al investigar transacciones, estados y fallos.",
+          },
+          {
+            title: "Mapeo de flujos",
+            description:
+              "Organización de caminos críticos relacionados con Pix In, Pix Out, conciliación, monitoreo, excepciones y lectura de eventos transaccionales.",
+          },
+          {
+            title: "Arquitectura de información",
+            description:
+              "Estructuración de la experiencia en capas: visión general de la operación, búsqueda con filtros y detalle transaccional con información accionable.",
+          },
+          {
+            title: "Validación con equipos",
+            description:
+              "Refinamiento de la solución con producto, tecnología, soporte y operación para asegurar alineación con reglas, limitaciones técnicas y escenarios reales de uso.",
+          },
+        ],
+      },
       macroDetail: {
         title: "De la visión macro al detalle operativo",
         paragraphs: [

@@ -190,6 +190,36 @@ export const pt = {
         ],
         note: "Mais do que desenhar telas, meu trabalho foi transformar uma operação financeira complexa em uma experiência rastreável, acionável e escalável.",
       },
+      uxResearch: {
+        title: "Pesquisa e estruturação de UX",
+        paragraphs: [
+          "Antes de desenhar a solução visual, aprofundei o entendimento sobre como operação, suporte e áreas de produto lidavam com as transações no dia a dia. A pesquisa aconteceu de forma prática, a partir das dúvidas recorrentes, dos pontos de atrito na leitura de status e da dependência do time técnico para investigar falhas ou localizar informações críticas.",
+          "Com base nesse levantamento, organizei a experiência em camadas: uma visão macro para acompanhar a saúde da operação, uma camada de busca e filtros para encontrar transações específicas, e uma camada de detalhe para explicar status, etapas, motivos de erro e informações acionáveis.",
+        ],
+        note: "O foco foi transformar complexidade técnica em clareza operacional, dando mais autonomia para os times e tornando o Vanir mais útil para investigação, acompanhamento e tomada de decisão.",
+        cards: [
+          {
+            title: "Entendimento operacional",
+            description:
+              "Levantamento das dúvidas recorrentes de operação, suporte e produto para entender onde os usuários travavam ao investigar transações, status e falhas.",
+          },
+          {
+            title: "Mapeamento dos fluxos",
+            description:
+              "Organização dos caminhos críticos de Pix In, Pix Out, conciliação, monitoramento, exceções e leitura de eventos transacionais.",
+          },
+          {
+            title: "Arquitetura da informação",
+            description:
+              "Estruturação da experiência em camadas: visão macro da operação, busca com filtros e detalhe transacional com informações acionáveis.",
+          },
+          {
+            title: "Validação com os times",
+            description:
+              "Refinamento das soluções com produto, tecnologia, suporte e operação para garantir aderência às regras, limitações técnicas e cenários reais de uso.",
+          },
+        ],
+      },
       macroDetail: {
         title: "Da visão macro ao detalhe operacional",
         paragraphs: [

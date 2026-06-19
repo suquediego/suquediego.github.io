@@ -191,6 +191,36 @@ export const en: Translation = {
         ],
         note: "More than designing screens, my work was to turn a complex financial operation into a traceable, actionable, and scalable experience.",
       },
+      uxResearch: {
+        title: "UX research and structure",
+        paragraphs: [
+          "Before designing the visual solution, I deepened my understanding of how operations, support and product teams handled transactions in their daily workflow. The research happened in a practical way, based on recurring questions, friction points in status interpretation and the dependency on technical teams to investigate failures or find critical information.",
+          "Based on this discovery, I structured the experience in layers: a macro view to monitor operational health, a search and filtering layer to locate specific transactions, and a detail layer to explain statuses, steps, error reasons and actionable information.",
+        ],
+        note: "The goal was to turn technical complexity into operational clarity, giving teams more autonomy and making Vanir more useful for investigation, monitoring and decision-making.",
+        cards: [
+          {
+            title: "Operational understanding",
+            description:
+              "Mapping recurring questions from operations, support and product teams to understand where users struggled when investigating transactions, statuses and failures.",
+          },
+          {
+            title: "Flow mapping",
+            description:
+              "Structuring critical paths related to Pix In, Pix Out, reconciliation, monitoring, exceptions and transactional event analysis.",
+          },
+          {
+            title: "Information architecture",
+            description:
+              "Organizing the experience into layers: operational overview, filtered search and transaction detail with actionable information.",
+          },
+          {
+            title: "Team validation",
+            description:
+              "Refining the solution with product, engineering, support and operations to ensure alignment with rules, technical constraints and real usage scenarios.",
+          },
+        ],
+      },
       macroDetail: {
         title: "From macro view to operational detail",
         paragraphs: [

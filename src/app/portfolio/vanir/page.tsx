@@ -281,6 +281,7 @@ export default function VanirPage() {
   const impactCards = caseText.impactCards;
   const impactComparison = caseText.impactComparison;
   const learningCards = caseText.learningCards;
+  const uxResearch = caseText.uxResearch;
 
   return (
     <PageShell variant="case">
@@ -395,6 +396,56 @@ export default function VanirPage() {
               address="figma.com/vanir/design-process"
               imageClassName="scale-[1.035] object-cover object-center"
             />
+          </div>
+        </section>
+
+        {/* PESQUISA E ESTRUTURAÇÃO DE UX */}
+        <section className="relative overflow-hidden bg-[#F3F3F3] px-5 py-24 md:px-8 lg:min-h-[760px]">
+          <div className="mx-auto grid min-h-[560px] max-w-[1240px] items-center gap-14 lg:grid-cols-[0.92fr_1.08fr] lg:gap-20">
+            <motion.div
+              initial={{ opacity: 0, y: 28, filter: "blur(10px)" }}
+              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              viewport={{ once: true, amount: 0.4 }}
+              transition={{ duration: 0.75, ease: "easeInOut" }}
+              className="max-w-[540px]"
+            >
+              <h2 className="text-left text-[36px] font-bold leading-[1] tracking-[-0.035em] text-[#303030] md:text-[44px] lg:text-[48px]">
+                {uxResearch.title}
+              </h2>
+
+              <div className="mt-7 space-y-5 text-left text-base leading-8 text-[#686868] md:text-xl md:leading-9">
+                {uxResearch.paragraphs.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </div>
+
+              <p className="mt-7 border-l border-[#BDBDBD] pl-5 text-left text-sm font-semibold leading-7 text-[#303030] md:text-base md:leading-8">
+                {uxResearch.note}
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 32, filter: "blur(10px)" }}
+              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              viewport={{ once: true, amount: 0.35 }}
+              transition={{ duration: 0.75, ease: "easeInOut" }}
+              className="grid w-full gap-5 sm:grid-cols-2"
+            >
+              {uxResearch.cards.map((card) => (
+                <div
+                  key={card.title}
+                  className="flex min-h-[230px] flex-col gap-6 rounded-[32px] border border-[#DADADA] bg-white p-7 shadow-[0_24px_70px_rgba(48,48,48,0.08)]"
+                >
+                  <h3 className="text-[26px] font-bold leading-[1.05] tracking-[-0.035em] text-[#303030] md:text-[30px]">
+                    {card.title}
+                  </h3>
+
+                  <p className="text-sm leading-6 text-[#686868] md:text-base md:leading-7">
+                    {card.description}
+                  </p>
+                </div>
+              ))}
+            </motion.div>
           </div>
         </section>
 
